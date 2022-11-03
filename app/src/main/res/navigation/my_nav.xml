@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="id.android.official.moviephile.HomeFragment"
+        android:name="id.android.official.moviephile.ui.fragments.HomeFragment"
         android:label="Movies"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/listFragment"
-        android:name="id.android.official.moviephile.ListFragment"
+        android:name="id.android.official.moviephile.ui.fragments.ListFragment"
         android:label="List"
         tools:layout="@layout/fragment_list" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="id.android.official.moviephile.ProfileFragment"
+        android:name="id.android.official.moviephile.ui.fragments.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

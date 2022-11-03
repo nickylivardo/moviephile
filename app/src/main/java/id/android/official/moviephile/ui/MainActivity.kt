@@ -1,4 +1,4 @@
-package id.android.official.moviephile
+package id.android.official.moviephile.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import id.android.official.moviephile.R
 import id.android.official.moviephile.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
