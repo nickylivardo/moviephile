@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-/app/src/main/java/id/android/official/moviephile/Constants.kt
+/app/src/main/java/id/android/official/moviephile/utils/Constants.kt
