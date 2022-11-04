@@ -54,6 +54,7 @@
                     android:paddingBottom="5dp"
                     android:text="@string/popular_movies"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -67,6 +68,7 @@
                     android:gravity="end"
                     android:textColor="@color/colorPrimaryLight"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintRight_toRightOf="parent"/>
 
@@ -98,6 +100,7 @@
                     android:paddingBottom="5dp"
                     android:text="@string/trending_now"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -111,6 +114,7 @@
                     android:gravity="end"
                     android:textColor="@color/colorPrimaryLight"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintRight_toRightOf="parent"/>
 
@@ -143,6 +147,7 @@
                     android:paddingBottom="5dp"
                     android:text="@string/top_rated_movies"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -156,6 +161,7 @@
                     android:gravity="end"
                     android:textColor="@color/colorPrimaryLight"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintRight_toRightOf="parent"/>
 
@@ -188,6 +194,7 @@
                     android:paddingBottom="5dp"
                     android:text="@string/tv_shows"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -201,6 +208,7 @@
                     android:gravity="end"
                     android:textColor="@color/colorPrimaryLight"
                     android:textSize="15sp"
+                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintRight_toRightOf="parent"/>
 

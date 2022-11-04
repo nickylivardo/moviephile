@@ -11,13 +11,13 @@ import id.android.official.moviephile.utils.MoviesDiffUtil
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MyViewHolder>() {
 
-    private var movie = emptyList<D>()
+    private var movies = emptyList<D>()
 
     class MyViewHolder(private val binding: ItemMovieLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(d: D) {
-            binding.d = d
+            binding.movie = d
             binding.executePendingBindings()
         }
 
@@ -35,18 +35,18 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentD = movie[position]
-        holder.bind(currentD)
+        val currentMovie = movies[position]
+        holder.bind(currentMovie)
     }
 
     override fun getItemCount(): Int {
-        return movie.size
+        return movies.size
     }
 
     fun setData(newData: Movie) {
-        val moviesDiffUtil = MoviesDiffUtil(movie, newData.d)
+        val moviesDiffUtil = MoviesDiffUtil(movies, newData.d)
         val diffUtilResult = DiffUtil.calculateDiff(moviesDiffUtil)
-        movie = newData.d
+        movies = newData.d
         diffUtilResult.dispatchUpdatesTo(this)
 
     }

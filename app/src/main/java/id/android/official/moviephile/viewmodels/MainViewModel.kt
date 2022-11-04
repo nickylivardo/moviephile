@@ -1,4 +1,4 @@
-package id.android.official.moviephile
+package id.android.official.moviephile.viewmodels
 
 import android.app.Application
 import android.content.Context
