@@ -1,23 +1,24 @@
 package id.android.official.moviephile.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ScrollView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
-import id.android.official.moviephile.viewmodels.MainViewModel
 import id.android.official.moviephile.adapters.MoviesAdapter
 import id.android.official.moviephile.databinding.FragmentHomeBinding
 import id.android.official.moviephile.utils.Constants.Companion.API_HOST
 import id.android.official.moviephile.utils.Constants.Companion.API_KEY
 import id.android.official.moviephile.utils.NetworkResult
+import id.android.official.moviephile.viewmodels.MainViewModel
+import id.android.official.moviephile.viewmodels.MoviesViewModel
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -30,7 +31,15 @@ class HomeFragment : Fragment() {
     private lateinit var mPopularRecyclerView: RecyclerView
     private val mAdapter = MoviesAdapter()
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var moviesViewModel: MoviesViewModel
 
+
+    //onCreate is created first than onCreateView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        moviesViewModel = ViewModelProvider(requireActivity()).get(MoviesViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +52,7 @@ class HomeFragment : Fragment() {
         mShimmerFrameLayout = binding.shimmerRecyclerView
         mScrollView = binding.scrollLayout
         mPopularRecyclerView = binding.rvPopular
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+
 
         setupRecycleViewAdapter()
         requestApiData()
@@ -53,7 +62,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun requestApiData() {
-        mainViewModel.getMovies(applyQueries(), API_KEY, API_HOST)
+        mainViewModel.getMovies(moviesViewModel.applyQueries(), API_KEY, API_HOST)
         mainViewModel.moviesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
