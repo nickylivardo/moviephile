@@ -14,5 +14,9 @@ class Constants {
         // API Query Keys
         const val QUERY_Q = "q"
         const val QUERY_TCONST = "tconst"
+
+        //ROOM Database
+        const val DATABASE_NAME = "movies_database"
+        const val MOVIES_TABLE = "movies_table"
     }
 }

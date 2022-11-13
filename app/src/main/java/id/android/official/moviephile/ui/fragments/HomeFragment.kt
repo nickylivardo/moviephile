@@ -1,6 +1,7 @@
 package id.android.official.moviephile.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ScrollView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -17,8 +19,10 @@ import id.android.official.moviephile.databinding.FragmentHomeBinding
 import id.android.official.moviephile.utils.Constants.Companion.API_HOST
 import id.android.official.moviephile.utils.Constants.Companion.API_KEY
 import id.android.official.moviephile.utils.NetworkResult
+import id.android.official.moviephile.utils.observeOnce
 import id.android.official.moviephile.viewmodels.MainViewModel
 import id.android.official.moviephile.viewmodels.MoviesViewModel
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -30,6 +34,7 @@ class HomeFragment : Fragment() {
     private lateinit var mScrollView: ScrollView
     private lateinit var mPopularRecyclerView: RecyclerView
     private val mAdapter = MoviesAdapter()
+
     private lateinit var mainViewModel: MainViewModel
     private lateinit var moviesViewModel: MoviesViewModel
 
@@ -47,6 +52,9 @@ class HomeFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
+
         val root: View = binding.root
 
         mShimmerFrameLayout = binding.shimmerRecyclerView
@@ -55,22 +63,24 @@ class HomeFragment : Fragment() {
 
 
         setupRecycleViewAdapter()
-        requestApiData()
+        readDatabase()
         return root
 
 
     }
 
     private fun requestApiData() {
+        Log.d("HomeFragment", "requestApiData called!")
         mainViewModel.getMovies(moviesViewModel.applyQueries(), API_KEY, API_HOST)
         mainViewModel.moviesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
+                    mScrollView.visibility = View.VISIBLE
                     response.data?.let { mAdapter.setData(it) }
                 }
                 is NetworkResult.Error -> {
-                    hideShimmerEffect()
+                    loadDataFromCache()
                     Toast.makeText(
                         requireContext(),
                         response.message.toString(),
@@ -79,6 +89,35 @@ class HomeFragment : Fragment() {
                 }
                 is NetworkResult.Loading -> {
                     showShimmerEffect()
+                }
+            }
+        }
+    }
+
+    private fun loadDataFromCache(){
+        lifecycleScope.launch {
+            mainViewModel.readMovies.observe(viewLifecycleOwner) { database ->
+                if (database.isNotEmpty()){
+                    mAdapter.setData(database[0].movie)
+                    hideShimmerEffect()
+                    mScrollView.visibility = View.VISIBLE
+                } else {
+                    hideShimmerEffect()
+                }
+            }
+        }
+    }
+
+    private fun readDatabase() {
+        lifecycleScope.launch {
+            mainViewModel.readMovies.observeOnce(viewLifecycleOwner) { database ->
+                if (database.isNotEmpty()) {
+                    Log.d("HomeFragment", "readDatabase called!")
+                    mAdapter.setData(database[0].movie)
+                    hideShimmerEffect()
+                    mScrollView.visibility = View.VISIBLE
+                } else {
+                    requestApiData()
                 }
             }
         }
@@ -100,7 +139,6 @@ class HomeFragment : Fragment() {
     private fun hideShimmerEffect() {
         mShimmerFrameLayout.hideShimmer()
         mShimmerFrameLayout.visibility = View.GONE
-        mScrollView.visibility = View.VISIBLE
     }
 
 
