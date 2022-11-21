@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var mShimmerFrameLayout: ShimmerFrameLayout
-    private lateinit var mScrollView: ScrollView
+    private lateinit var mLinearLayout: LinearLayout
     private lateinit var mPopularRecyclerView: RecyclerView
     private val mAdapter = MoviesAdapter()
 
@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         mShimmerFrameLayout = binding.shimmerRecyclerView
-        mScrollView = binding.scrollLayout
+        mLinearLayout = binding.contentLayout
         mPopularRecyclerView = binding.rvPopular
 
 
@@ -76,7 +76,7 @@ class HomeFragment : Fragment() {
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    mScrollView.visibility = View.VISIBLE
+                    mLinearLayout.visibility = View.VISIBLE
                     response.data?.let { mAdapter.setData(it) }
                 }
                 is NetworkResult.Error -> {
@@ -100,7 +100,7 @@ class HomeFragment : Fragment() {
                 if (database.isNotEmpty()){
                     mAdapter.setData(database[0].movie)
                     hideShimmerEffect()
-                    mScrollView.visibility = View.VISIBLE
+                    mLinearLayout.visibility = View.VISIBLE
                 } else {
                     hideShimmerEffect()
                 }
@@ -115,7 +115,7 @@ class HomeFragment : Fragment() {
                     Log.d("HomeFragment", "readDatabase called!")
                     mAdapter.setData(database[0].movie)
                     hideShimmerEffect()
-                    mScrollView.visibility = View.VISIBLE
+                    mLinearLayout.visibility = View.VISIBLE
                 } else {
                     requestApiData()
                 }
@@ -126,7 +126,7 @@ class HomeFragment : Fragment() {
     private fun setupRecycleViewAdapter() {
         mPopularRecyclerView.adapter = mAdapter
         mPopularRecyclerView.layoutManager =
-            GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
+            GridLayoutManager(activity, 2)
         mPopularRecyclerView.setHasFixedSize(true)
         showShimmerEffect()
     }

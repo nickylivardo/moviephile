@@ -26,7 +26,7 @@ class MainViewModel @Inject constructor(
 
     val readMovies: LiveData<List<MoviesEntity>> = repository.local.readDatabase().asLiveData()
 
-    private fun inserMovies(moviesEntity: MoviesEntity) = viewModelScope.launch(Dispatchers.IO) {
+    private fun insertMovies(moviesEntity: MoviesEntity) = viewModelScope.launch(Dispatchers.IO) {
         repository.local.insertMovies(moviesEntity)
     }
 
@@ -35,10 +35,10 @@ class MainViewModel @Inject constructor(
     var moviesResponse: MutableLiveData<NetworkResult<Movie>> = MutableLiveData()
 
     fun getMovies(queries: Map<String, String>, api_key: String, api_host: String) = viewModelScope.launch {
-        getRecipesSafeCall(queries, api_key, api_host)
+        getMoviesSafeCall(queries, api_key, api_host)
     }
 
-    private suspend fun getRecipesSafeCall(queries: Map<String, String>, apiKey: String, apiHost: String) {
+    private suspend fun getMoviesSafeCall(queries: Map<String, String>, apiKey: String, apiHost: String) {
         moviesResponse.value = NetworkResult.Loading()
         if(hasInternetConnection()){
             try {
@@ -60,7 +60,7 @@ class MainViewModel @Inject constructor(
 
     private fun offlineCacheMovies(movie: Movie) {
         val moviesEntity = MoviesEntity(movie)
-        inserMovies(moviesEntity)
+        insertMovies(moviesEntity)
     }
 
     private fun handleMoviesResponse(response: Response<Movie>): NetworkResult<Movie> {
