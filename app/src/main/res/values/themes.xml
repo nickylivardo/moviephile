@@ -15,6 +15,14 @@
         <item name="android:navigationBarColor">@color/white</item>
     </style>
 
+
+    <style name="Theme.Moviephile.NoActionBar" parent="Theme.Moviephile">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+
     <style name="SplashScreenStyle" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/black</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>

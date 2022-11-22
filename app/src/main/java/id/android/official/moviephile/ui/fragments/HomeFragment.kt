@@ -2,10 +2,9 @@ package id.android.official.moviephile.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
 import dagger.hilt.android.AndroidEntryPoint
+import id.android.official.moviephile.R
 import id.android.official.moviephile.adapters.MoviesAdapter
 import id.android.official.moviephile.databinding.FragmentHomeBinding
 import id.android.official.moviephile.utils.Constants.Companion.API_HOST
@@ -26,7 +26,7 @@ import id.android.official.moviephile.viewmodels.MoviesViewModel
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -60,6 +60,8 @@ class HomeFragment : Fragment() {
 
         val root: View = binding.root
 
+        setHasOptionsMenu(true)
+
         mShimmerFrameLayout = binding.shimmerRecyclerView
         mLinearLayout = binding.contentLayout
         mPopularRecyclerView = binding.rvPopular
@@ -78,6 +80,8 @@ class HomeFragment : Fragment() {
                     moviesViewModel.showNetworkStatus()
                 }
         }
+
+
 
 
         return root
@@ -163,4 +167,21 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.movies_menu, menu)
+
+        val search = menu.findItem(R.id.menu_search)
+        val searchView = search.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(p0: String?): Boolean {
+        return true
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean {
+        return true
+    }
 }

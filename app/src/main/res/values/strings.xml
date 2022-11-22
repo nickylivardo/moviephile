@@ -13,4 +13,8 @@
     <string name="error_image">Error_Image</string>
     <string name="error">ERROR</string>
     <string name="movie_image">Movie Image</string>
+    <string name="phone_code">+62</string>
+    <string name="phone">No. Hp</string>
+    <string name="login">LOGIN</string>
+    <string name="search">Search</string>
 </resources>
