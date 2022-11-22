@@ -18,6 +18,7 @@ import id.android.official.moviephile.adapters.MoviesAdapter
 import id.android.official.moviephile.databinding.FragmentHomeBinding
 import id.android.official.moviephile.utils.Constants.Companion.API_HOST
 import id.android.official.moviephile.utils.Constants.Companion.API_KEY
+import id.android.official.moviephile.utils.NetworkListener
 import id.android.official.moviephile.utils.NetworkResult
 import id.android.official.moviephile.utils.observeOnce
 import id.android.official.moviephile.viewmodels.MainViewModel
@@ -34,6 +35,8 @@ class HomeFragment : Fragment() {
     private lateinit var mLinearLayout: LinearLayout
     private lateinit var mPopularRecyclerView: RecyclerView
     private val mAdapter = MoviesAdapter()
+
+    private lateinit var networkListener: NetworkListener
 
     private lateinit var mainViewModel: MainViewModel
     private lateinit var moviesViewModel: MoviesViewModel
@@ -64,6 +67,19 @@ class HomeFragment : Fragment() {
 
         setupRecycleViewAdapter()
         readDatabase()
+
+        lifecycleScope.launch{
+            networkListener = NetworkListener()
+            networkListener.checkNetworkAvailability(requireContext())
+                .collect {
+                        status ->
+                    Log.d("NetworkListener", status.toString())
+                    moviesViewModel.networkStatus = status
+                    moviesViewModel.showNetworkStatus()
+                }
+        }
+
+
         return root
 
 

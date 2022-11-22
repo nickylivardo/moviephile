@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "770602863750",
+    "project_id": "moviephile-9d9cb",
+    "storage_bucket": "moviephile-9d9cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770602863750:android:a974fac1344f9211bb9507",
+        "android_client_info": {
+          "package_name": "id.android.official.moviephile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770602863750-jr5lcekna9ppb9sc5i8644cbu28d0mnn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.android.official.moviephile",
+            "certificate_hash": "f77f4ce20e4ee49ee1cb5f8ace32bcd8229b7989"
+          }
+        },
+        {
+          "client_id": "770602863750-i9uls4ae8o4kbojproffuuedbsh0p2l5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWQHO3A9nim4E12Snpaljm1STjhVFG6sY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770602863750-i9uls4ae8o4kbojproffuuedbsh0p2l5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
