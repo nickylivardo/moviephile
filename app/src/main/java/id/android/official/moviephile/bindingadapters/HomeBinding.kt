@@ -30,7 +30,7 @@ class HomeBinding {
 
         @BindingAdapter("readApiResponse2", "readDatabase2", requireAll = true)
         @JvmStatic
-        fun errorTextVieVisibility(
+        fun errorTextViewVisibility(
             textView: TextView,
             apiResponse: NetworkResult<Movie>?,
             database: List<MoviesEntity>?
@@ -42,6 +42,19 @@ class HomeBinding {
                 textView.visibility = View.GONE
             } else if (apiResponse is NetworkResult.Success) {
                 textView.visibility = View.GONE
+            }
+        }
+
+
+        @BindingAdapter("readApiResponse3", "readSearchQuery", requireAll = true)
+        @JvmStatic
+        fun searchResultTextView(
+            textView: TextView,
+            apiResponse: NetworkResult<Movie>?,
+            searchQuery: String
+        ){
+            if (apiResponse is NetworkResult.Success) {
+                textView.text = "Result From \"$searchQuery\""
             }
         }
     }

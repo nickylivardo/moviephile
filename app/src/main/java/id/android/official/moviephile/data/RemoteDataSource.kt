@@ -12,4 +12,8 @@ class RemoteDataSource @Inject constructor(
         return moviesApi.getMovies(queries, api_key, api_host)
     }
 
+    suspend fun searchMovies(searchQuery: Map<String, String>, api_key: String, api_host: String): Response<Movie> {
+        return moviesApi.searchMovies(searchQuery, api_key, api_host)
+    }
+
 }

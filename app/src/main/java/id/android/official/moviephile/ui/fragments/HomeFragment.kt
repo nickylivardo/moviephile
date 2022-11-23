@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
-import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -114,6 +114,34 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         }
     }
 
+
+    private fun searchApiData(searchQuery: String) {
+        showShimmerEffect()
+        mainViewModel.searchMovies(moviesViewModel.applySearchQuery(searchQuery), API_KEY, API_HOST)
+        mainViewModel.searchedMoviesResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkResult.Success -> {
+                    hideShimmerEffect()
+                    mLinearLayout.visibility = View.VISIBLE
+                    val movies = response.data
+                    movies?.let { mAdapter.setData(it) }
+                }
+                is NetworkResult.Error -> {
+                    hideShimmerEffect()
+                    loadDataFromCache()
+                    Toast.makeText(
+                        requireContext(),
+                        response.message.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                is NetworkResult.Loading -> {
+                    showShimmerEffect()
+                }
+            }
+        }
+    }
+
     private fun loadDataFromCache(){
         lifecycleScope.launch {
             mainViewModel.readMovies.observe(viewLifecycleOwner) { database ->
@@ -153,11 +181,13 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
 
     private fun showShimmerEffect() {
+        mShimmerFrameLayout.visibility = View.VISIBLE
+        mLinearLayout.visibility = View.GONE
         mShimmerFrameLayout.startShimmer()
     }
 
     private fun hideShimmerEffect() {
-        mShimmerFrameLayout.hideShimmer()
+        mShimmerFrameLayout.stopShimmer()
         mShimmerFrameLayout.visibility = View.GONE
     }
 
@@ -177,7 +207,10 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         searchView?.setOnQueryTextListener(this)
     }
 
-    override fun onQueryTextSubmit(p0: String?): Boolean {
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if(query != null) {
+            searchApiData(query)
+        }
         return true
     }
 

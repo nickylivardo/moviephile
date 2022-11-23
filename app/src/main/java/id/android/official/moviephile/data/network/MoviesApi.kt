@@ -14,4 +14,11 @@ interface MoviesApi {
         @Header("X-RapidAPI-Key") api_key: String,
         @Header("X-RapidAPI-Host") api_host: String
     ): Response<Movie>
+
+    @GET("auto-complete")
+    suspend fun searchMovies(
+        @QueryMap searchQuery: Map<String, String>,
+        @Header("X-RapidAPI-Key") api_key: String,
+        @Header("X-RapidAPI-Host") api_host: String
+    ): Response<Movie>
 }

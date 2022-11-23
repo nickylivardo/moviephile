@@ -17,6 +17,14 @@ class MoviesViewModel(application: Application) : AndroidViewModel(application) 
         return queries
     }
 
+    fun applySearchQuery(searchQuery: String): HashMap<String, String> {
+        val queries: HashMap<String, String> = HashMap()
+
+        queries[QUERY_Q] = searchQuery
+
+        return queries
+    }
+
     fun showNetworkStatus() {
         if(!networkStatus) {
             Toast.makeText(getApplication(), "Tidak Ada Internet.", Toast.LENGTH_SHORT).show()

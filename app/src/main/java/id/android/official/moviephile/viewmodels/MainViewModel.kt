@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import id.android.official.moviephile.data.Repository
 import id.android.official.moviephile.data.database.MoviesEntity
 import id.android.official.moviephile.models.Movie
+import id.android.official.moviephile.utils.Constants
 import id.android.official.moviephile.utils.NetworkResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,9 +34,15 @@ class MainViewModel @Inject constructor(
     /** Retrofit */
 
     var moviesResponse: MutableLiveData<NetworkResult<Movie>> = MutableLiveData()
+    var searchedMoviesResponse: MutableLiveData<NetworkResult<Movie>> = MutableLiveData()
+    var searchedQuery : String = ""
 
     fun getMovies(queries: Map<String, String>, api_key: String, api_host: String) = viewModelScope.launch {
         getMoviesSafeCall(queries, api_key, api_host)
+    }
+
+    fun searchMovies(searchQuery: Map<String, String>, api_key: String, api_host: String) = viewModelScope.launch {
+        searchMoviesSafeCall(searchQuery, api_key, api_host)
     }
 
     private suspend fun getMoviesSafeCall(queries: Map<String, String>, apiKey: String, apiHost: String) {
@@ -55,6 +62,21 @@ class MainViewModel @Inject constructor(
             }
         } else {
             moviesResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+    }
+
+    private suspend fun searchMoviesSafeCall(searchQuery: Map<String, String>, apiKey: String, apiHost: String) {
+        searchedMoviesResponse.value = NetworkResult.Loading()
+        if(hasInternetConnection()){
+            try {
+                val response = repository.remote.searchMovies(searchQuery, apiKey, apiHost)
+                searchedMoviesResponse.value = handleMoviesResponse(response)
+                searchedQuery = searchQuery.getValue(Constants.QUERY_Q)
+            } catch (e: Exception) {
+                searchedMoviesResponse.value = NetworkResult.Error("Catch Exception!!!")
+            }
+        } else {
+            searchedMoviesResponse.value = NetworkResult.Error("No Internet Connection.")
         }
     }
 

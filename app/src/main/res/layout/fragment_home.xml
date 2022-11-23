@@ -59,6 +59,8 @@
                     android:paddingEnd="15dp"
                     android:gravity="start"
                     android:paddingBottom="5dp"
+                    readApiResponse3="@{mainViewModel.searchedMoviesResponse}"
+                    readSearchQuery="@{mainViewModel.searchedQuery}"
                     android:text="@string/popular_movies"
                     android:textSize="18sp"
                     android:textStyle="bold"
