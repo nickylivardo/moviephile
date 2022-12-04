@@ -29,4 +29,6 @@
     <color name="green">#17FF00</color>
 
     <color name="shimmer">#9F9F9F</color>
+    
+    <color name="actionBarBackgroundColor">@color/colorPrimary</color>
 </resources>

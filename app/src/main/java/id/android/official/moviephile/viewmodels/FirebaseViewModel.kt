@@ -25,7 +25,7 @@ class FirebaseViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
-    val readPreferencesBoolean = dataStoreRepository.readPreferencesBoolean
+    val readSignUpPreferences = dataStoreRepository.readSignUpStatusBoolean
 
     private var userData : UserData? = null
 

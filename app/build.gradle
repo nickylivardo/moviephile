@@ -7,6 +7,12 @@ plugins {
     id 'com.google.dagger.hilt.android'
     id 'com.google.gms.google-services'
 
+    // enable parcelize plugin
+    id 'kotlin-parcelize'
+
+    // enable Safe Args
+    id 'androidx.navigation.safeargs.kotlin'
+
 
 }
 
@@ -31,7 +37,7 @@ android {
         }
     }
 
-    // enable dataBinding
+    // enable dataBinding and viewBinding
     buildFeatures {
         dataBinding true
         viewBinding true

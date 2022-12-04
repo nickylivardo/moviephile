@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        firebaseViewModel.readPreferencesBoolean.asLiveData().observe(this) { value ->
+        firebaseViewModel.readSignUpPreferences.asLiveData().observe(this) { value ->
             signUpStatus = value
             val loginStatus = firebaseViewModel.auth.currentUser
             Log.d("LOGIN", "USER IS LOGGED IN $loginStatus")

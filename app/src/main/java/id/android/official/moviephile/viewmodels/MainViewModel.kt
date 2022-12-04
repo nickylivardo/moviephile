@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import id.android.official.moviephile.data.Repository
 import id.android.official.moviephile.data.database.MoviesEntity
 import id.android.official.moviephile.models.Movie
+import id.android.official.moviephile.models.MovieDetails
 import id.android.official.moviephile.utils.Constants
 import id.android.official.moviephile.utils.NetworkResult
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +36,7 @@ class MainViewModel @Inject constructor(
 
     var moviesResponse: MutableLiveData<NetworkResult<Movie>> = MutableLiveData()
     var searchedMoviesResponse: MutableLiveData<NetworkResult<Movie>> = MutableLiveData()
+    var movieDetailsResponse: MutableLiveData<NetworkResult<MovieDetails>> = MutableLiveData()
     var searchedQuery : String = ""
 
     fun getMovies(queries: Map<String, String>, api_key: String, api_host: String) = viewModelScope.launch {
@@ -43,6 +45,10 @@ class MainViewModel @Inject constructor(
 
     fun searchMovies(searchQuery: Map<String, String>, api_key: String, api_host: String) = viewModelScope.launch {
         searchMoviesSafeCall(searchQuery, api_key, api_host)
+    }
+
+    fun getMovieDetails(movieId: Map<String, String>, api_key: String, api_host: String) = viewModelScope.launch {
+        getMovieDetailsSafeCall(movieId, api_key, api_host)
     }
 
     private suspend fun getMoviesSafeCall(queries: Map<String, String>, apiKey: String, apiHost: String) {
@@ -80,6 +86,21 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    private suspend fun getMovieDetailsSafeCall(movieId: Map<String, String>, apiKey: String, apiHost: String) {
+        movieDetailsResponse.value = NetworkResult.Loading()
+        if(hasInternetConnection()){
+            try {
+                val response = repository.remote.getMovieDetails(movieId, apiKey, apiHost)
+                movieDetailsResponse.value = handleMovieDetailsResponse(response)
+                searchedQuery = movieId.getValue(Constants.QUERY_Q)
+            } catch (e: Exception) {
+                movieDetailsResponse.value = NetworkResult.Error("Catch Exception!!!")
+            }
+        } else {
+            movieDetailsResponse.value = NetworkResult.Error("No Internet Connection.")
+        }
+    }
+
     private fun offlineCacheMovies(movie: Movie) {
         val moviesEntity = MoviesEntity(movie)
         insertMovies(moviesEntity)
@@ -99,6 +120,27 @@ class MainViewModel @Inject constructor(
             response.isSuccessful -> {
                 val movies = response.body()
                 return NetworkResult.Success(movies!!)
+            }
+            else -> {
+                return NetworkResult.Error(response.message())
+            }
+        }
+    }
+
+    private fun handleMovieDetailsResponse(response: Response<MovieDetails>): NetworkResult<MovieDetails> {
+        when {
+            response.message().toString().contains("timeout") -> {
+                return NetworkResult.Error("Timeout")
+            }
+            response.code() == 402 -> {
+                return NetworkResult.Error("API Key Limited.")
+            }
+            response.body()!!.id!!.isEmpty() -> {
+                return NetworkResult.Error("Movies Not Found.")
+            }
+            response.isSuccessful -> {
+                val movieDetails = response.body()
+                return NetworkResult.Success(movieDetails!!)
             }
             else -> {
                 return NetworkResult.Error(response.message())

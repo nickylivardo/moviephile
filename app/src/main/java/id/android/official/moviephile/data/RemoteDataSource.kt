@@ -2,6 +2,7 @@ package id.android.official.moviephile.data
 
 import id.android.official.moviephile.data.network.MoviesApi
 import id.android.official.moviephile.models.Movie
+import id.android.official.moviephile.models.MovieDetails
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -14,6 +15,10 @@ class RemoteDataSource @Inject constructor(
 
     suspend fun searchMovies(searchQuery: Map<String, String>, api_key: String, api_host: String): Response<Movie> {
         return moviesApi.searchMovies(searchQuery, api_key, api_host)
+    }
+
+    suspend fun getMovieDetails(movieId: Map<String, String>, api_key: String, api_host: String): Response<MovieDetails> {
+        return moviesApi.moviesDetails(movieId, api_key, api_host)
     }
 
 }

@@ -27,5 +27,6 @@ class Constants {
         const val PREFERENCES_NAME = "my_preferences"
         const val SIGNUP_STATUS = "signup_status"
         const val MOBILE_NUMBER = "mobile_number"
+        const val BACK_ONLINE = "back_online"
     }
 }

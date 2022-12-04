@@ -1,25 +1,29 @@
 package id.android.official.moviephile.models
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
+@Parcelize
 data class D(
     @SerializedName("i")
-    val i: I,
+    val i: @RawValue I?,
     @SerializedName("id")
-    val id: String,
+    val id: String?,
     @SerializedName("l")
-    val l: String,
+    val l: String?,
     @SerializedName("q")
-    val q: String,
+    val q: String?,
     @SerializedName("qid")
-    val qid: String,
+    val qid: String?,
     @SerializedName("rank")
-    val rank: Int,
+    val rank: Int?,
     @SerializedName("s")
-    val s: String,
+    val s: String?,
     @SerializedName("y")
-    val y: Int,
+    val y: Int?,
     @SerializedName("yr")
-    val yr: String
-)
+    val yr: String?
+) : Parcelable

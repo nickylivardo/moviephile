@@ -7,5 +7,5 @@ data class Movie(
     @SerializedName("d")
     val d: List<D>,
     @SerializedName("q")
-    val q: String
+    val q: String?
 )

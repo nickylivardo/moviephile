@@ -68,7 +68,10 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
 
         setupRecycleViewAdapter()
-        readDatabase()
+
+        moviesViewModel.readBackOnlinePreferences.observe(viewLifecycleOwner) {
+            moviesViewModel.backOnline = it
+        }
 
         lifecycleScope.launch{
             networkListener = NetworkListener()
@@ -78,6 +81,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
                     Log.d("NetworkListener", status.toString())
                     moviesViewModel.networkStatus = status
                     moviesViewModel.showNetworkStatus()
+                    readDatabase()
                 }
         }
 

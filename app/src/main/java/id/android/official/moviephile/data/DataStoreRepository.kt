@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
+import id.android.official.moviephile.utils.Constants.Companion.BACK_ONLINE
 import id.android.official.moviephile.utils.Constants.Companion.PREFERENCES_NAME
 import id.android.official.moviephile.utils.Constants.Companion.SIGNUP_STATUS
 import kotlinx.coroutines.flow.Flow
@@ -50,7 +51,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     }
 
 
-    val readPreferencesBoolean: Flow<Boolean> = dataStore.data
+    val readSignUpStatusBoolean: Flow<Boolean> = dataStore.data
         .catch { exception ->
             // dataStore.data throws an IOException when an error is encountered when reading data
             if (exception is IOException) {
@@ -61,6 +62,20 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         }.map { preferences ->
             // Get our show completed value, defaulting to false if not set:
             val value = preferences[booleanPreferencesKey(SIGNUP_STATUS)] ?: false
+            value
+        }
+
+    val readBackOnlineBoolean: Flow<Boolean> = dataStore.data
+        .catch { exception ->
+            // dataStore.data throws an IOException when an error is encountered when reading data
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }.map { preferences ->
+            // Get our show completed value, defaulting to false if not set:
+            val value = preferences[booleanPreferencesKey(BACK_ONLINE)] ?: false
             value
         }
 

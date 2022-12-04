@@ -1,6 +1,7 @@
 package id.android.official.moviephile.data.network
 
 import id.android.official.moviephile.models.Movie
+import id.android.official.moviephile.models.MovieDetails
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -21,4 +22,11 @@ interface MoviesApi {
         @Header("X-RapidAPI-Key") api_key: String,
         @Header("X-RapidAPI-Host") api_host: String
     ): Response<Movie>
+
+    @GET("title/get-overview-details")
+    suspend fun moviesDetails(
+        @QueryMap movieId: Map<String, String>,
+        @Header("X-RapidAPI-Key") api_key: String,
+        @Header("X-RapidAPI-Host") api_host: String
+    ): Response<MovieDetails>
 }

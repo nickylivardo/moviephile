@@ -78,4 +78,10 @@ class ProfileFragment : Fragment() {
         finishAffinity(requireActivity())
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }
