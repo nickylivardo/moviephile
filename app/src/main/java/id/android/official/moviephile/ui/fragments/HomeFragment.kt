@@ -45,8 +45,8 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     //onCreate is created first than onCreateView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
-        moviesViewModel = ViewModelProvider(requireActivity()).get(MoviesViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        moviesViewModel = ViewModelProvider(requireActivity())[MoviesViewModel::class.java]
     }
 
     override fun onCreateView(

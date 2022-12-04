@@ -18,4 +18,24 @@
     <string name="login">LOGIN</string>
     <string name="search">Search</string>
     <string name="no_data">[no data]</string>
+    <string name="your_name">Nama Anda</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="verify">VERIFIKASI</string>
+    <string name="otp">OTP</string>
+    <string name="no_otp">Tidak menerima OTP?</string>
+    <string name="resend_otp">Kirim Ulang</string>
+    <string name="please_wait">Please Wait…</string>
+    <string name="wait">Sebentar…</string>
+    <string name="please_click_back_again_to_exit">Click Again To Exit</string>
+    <string name="err_msg_enter_name">Enter Your Name</string>
+    <string name="please_fill">Please Fill The Field</string>
+    <string name="err_msg_phone_number_length">Under 5 Digits!</string>
+    <string name="otp_send">Wait For OTP</string>
+    <string name="otp_resend_success">OTP Resend Success</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="sign_out_dialog_message">Yakin Keluar Akun?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+
+
 </resources>

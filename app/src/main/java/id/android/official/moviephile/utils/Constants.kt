@@ -15,8 +15,17 @@ class Constants {
         const val QUERY_Q = "q"
         const val QUERY_TCONST = "tconst"
 
-        //ROOM Database
+        // ROOM Database
         const val DATABASE_NAME = "movies_database"
         const val MOVIES_TABLE = "movies_table"
+
+        // Firebase
+        const val USERS = "users"
+        const val USERID = "userId"
+
+        //DataStore Preferences
+        const val PREFERENCES_NAME = "my_preferences"
+        const val SIGNUP_STATUS = "signup_status"
+        const val MOBILE_NUMBER = "mobile_number"
     }
 }

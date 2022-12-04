@@ -19,6 +19,7 @@
     <style name="Theme.Moviephile.NoActionBar" parent="Theme.Moviephile">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:navigationBarColor">@color/colorSecondaryDark</item>
 
     </style>
 
@@ -26,8 +27,16 @@
     <style name="SplashScreenStyle" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/black</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="windowSplashScreenAnimationDuration">1000</item>
 
         <item name="postSplashScreenTheme">@style/Theme.Moviephile</item>
+    </style>
+
+
+    <style name="MaterialButtonStyle" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:backgroundTint">@color/button_disabled</item>
+    </style>
+
+    <style name="MaterialTextViewStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/button_disabled</item>
     </style>
 </resources>

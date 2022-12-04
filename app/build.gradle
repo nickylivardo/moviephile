@@ -114,6 +114,9 @@ dependencies {
     // Android 12 Splash Screen
     implementation 'androidx.core:core-splashscreen:1.0.0'
 
+    // OnBackPressed
+    implementation "androidx.activity:activity-ktx:1.7.0-alpha02"
+
 
 
 
