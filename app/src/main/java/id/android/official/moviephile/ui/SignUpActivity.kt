@@ -9,6 +9,7 @@ import android.util.DisplayMetrics
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import id.android.official.moviephile.R
@@ -46,19 +47,20 @@ class SignUpActivity : BaseActivity() {
         mNameTextField = binding.nameField
 
 
-        mobile = firebaseViewModel.readPreferences(Constants.MOBILE_NUMBER)
+//        mobile = firebaseViewModel.readPreferences(Constants.MOBILE_NUMBER)
 
-        binding.btnSignUp.setOnClickListener{
-            this.currentFocus?.let { view ->
-                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                imm?.hideSoftInputFromWindow(view.windowToken, 0)
+        firebaseViewModel.readMobilePreferences.asLiveData().observe(this) { value ->
+            mobile = value
+            binding.btnSignUp.setOnClickListener{
+                this.currentFocus?.let { view ->
+                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                    imm?.hideSoftInputFromWindow(view.windowToken, 0)
+                }
+                if(validateSignInDetails()) {
+                    showProgressDialog(resources.getString(R.string.wait))
+                    firebaseViewModel.onSignUp(mobile, mNameTextField.text.toString(), "", this)
+                }
             }
-            if(validateSignInDetails()) {
-                showProgressDialog(resources.getString(R.string.wait))
-                firebaseViewModel.onSignUp(mobile, mNameTextField.text.toString(), "", this)
-            }
-
-
         }
 
         onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {

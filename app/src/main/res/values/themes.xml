@@ -51,6 +51,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:navigationBarColor">@color/white</item>
     </style>
     
     <style name="CustomTabLayoutStyle" parent="Widget.Design.TabLayout">

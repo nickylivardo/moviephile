@@ -27,6 +27,8 @@ class FirebaseViewModel @Inject constructor(
 
     val readSignUpPreferences = dataStoreRepository.readSignUpStatusBoolean
 
+    val readMobilePreferences = dataStoreRepository.readMobileNumber
+
     private var userData : UserData? = null
 
 
@@ -93,12 +95,12 @@ class FirebaseViewModel @Inject constructor(
         db.collection(USERS).document(getCurrentUserID()).get().addOnSuccessListener{
             if(it.exists()) {
                 Log.d("USER", "USER already exists.")
-                saveBooleanPreferences(SIGNUP_STATUS, true)
-                when (activity){
-                    is VerificationActivity -> {
-                        activity.userLoggedInSuccess()
-                    }
-                }
+                saveBooleanPreferences2(SIGNUP_STATUS, true, activity)
+//                when (activity){
+//                    is VerificationActivity -> {
+//                        activity.userLoggedInSuccess()
+//                    }
+//                }
             }else {
                 Log.d("USER", "New User Logged In")
                 when (activity){
@@ -118,18 +120,29 @@ class FirebaseViewModel @Inject constructor(
         }
     }
 
-    fun readPreferences(key: String) : String {
-        var preferences: String? = ""
-        viewModelScope.launch {
-            preferences = dataStoreRepository.readPreferences(key)
-            Log.d("PREFERENCES", preferences.toString())
-        }
-        return preferences!!
-    }
+//    fun readPreferences(key: String) : String {
+//        var preferences: String? = ""
+//        viewModelScope.launch {
+//            preferences = dataStoreRepository.readPreferences(key)
+//            Log.d("PREFERENCES", preferences.toString())
+//        }
+//        return preferences!!
+//    }
 
     fun saveBooleanPreferences(key: String, value: Boolean) {
         viewModelScope.launch {
             dataStoreRepository.saveBooleanPreferences(key, value)
+        }
+    }
+
+    private fun saveBooleanPreferences2(key: String, value: Boolean, activity: Activity) {
+        viewModelScope.launch {
+            dataStoreRepository.saveBooleanPreferences(key, value)
+            when (activity){
+                is VerificationActivity -> {
+                    activity.userLoggedInSuccess()
+                }
+            }
         }
     }
 

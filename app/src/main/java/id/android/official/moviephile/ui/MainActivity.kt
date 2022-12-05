@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             signUpStatus = value
             val loginStatus = firebaseViewModel.auth.currentUser
             Log.d("LOGIN", "USER IS LOGGED IN $loginStatus")
+            Log.d("SIGNUP_STATUS", signUpStatus.toString())
             if(loginStatus == null) {
                 val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
