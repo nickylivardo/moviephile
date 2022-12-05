@@ -11,7 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.android.official.moviephile.R
 import id.android.official.moviephile.adapters.PagerAdapter
 import id.android.official.moviephile.databinding.ActivityDetailsBinding
-import id.android.official.moviephile.ui.fragments.AboutFragment
 import id.android.official.moviephile.ui.fragments.AddToListFragment
 import id.android.official.moviephile.ui.fragments.OverviewFragment
 
@@ -33,12 +32,10 @@ class DetailsActivity : AppCompatActivity() {
 
         val fragments = ArrayList<Fragment>()
         fragments.add(OverviewFragment())
-        fragments.add(AboutFragment())
         fragments.add(AddToListFragment())
 
         val titles = ArrayList<String>()
         titles.add("Overview")
-        titles.add("About")
         titles.add("Add To List")
 
         val movieBundle = Bundle()

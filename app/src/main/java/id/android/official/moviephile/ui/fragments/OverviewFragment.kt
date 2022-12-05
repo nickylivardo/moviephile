@@ -57,6 +57,7 @@ class OverviewFragment : Fragment() {
         }
         binding.titleTextView.text = myBundle?.l
         binding.typeDescription.text = myBundle?.q ?: "unknown"
+        binding.yearValue.text = myBundle?.y?.toString() ?: "[no data]"
         binding.rankValue.text = myBundle?.rank?.toString() ?: "[no data]"
         binding.starValue.text = myBundle?.s ?: "[no data]"
 
@@ -78,6 +79,13 @@ class OverviewFragment : Fragment() {
                     hideShimmerEffect()
                     val movies = response.data
                     movies?.let {
+                        binding.releaseDateValue.text = it.releaseDate ?: "[no data]"
+                        binding.runningTimeValue.text = it.title?.runningTimeInMinutes?.toString() ?: "[no data]"
+                        binding.mpaaRatingValue.text = it.certificates?.uS?.get(0)?.certificate ?: "[no data]"
+                        binding.mpaaRatingReasonValue.text = it.certificates?.uS?.get(0)?.ratingReason ?: "[no data]"
+                        binding.imdbRatingValue.text = it.ratings?.rating?.toString() ?: "[no data]"
+                        binding.ratingCountValue.text = it.ratings?.ratingCount?.toString() ?: "[no data]"
+                        binding.topRankValue.text = it.ratings?.topRank?.toString() ?: "[no data]"
                         binding.summaryTextView.text = it.plotSummary?.text ?: "[no data]"
                     }
                 }
