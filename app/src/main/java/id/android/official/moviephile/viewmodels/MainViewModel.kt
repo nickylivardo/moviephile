@@ -92,7 +92,6 @@ class MainViewModel @Inject constructor(
             try {
                 val response = repository.remote.getMovieDetails(movieId, apiKey, apiHost)
                 movieDetailsResponse.value = handleMovieDetailsResponse(response)
-                searchedQuery = movieId.getValue(Constants.QUERY_Q)
             } catch (e: Exception) {
                 movieDetailsResponse.value = NetworkResult.Error("Catch Exception!!!")
             }

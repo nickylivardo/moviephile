@@ -1,8 +1,10 @@
 package id.android.official.moviephile.ui.fragments
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -25,6 +27,7 @@ import id.android.official.moviephile.viewmodels.MainViewModel
 import id.android.official.moviephile.viewmodels.MoviesViewModel
 import kotlinx.coroutines.launch
 
+
 @AndroidEntryPoint
 class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
@@ -40,6 +43,8 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var mainViewModel: MainViewModel
     private lateinit var moviesViewModel: MoviesViewModel
+
+    private lateinit var searchView: SearchView
 
 
     //onCreate is created first than onCreateView
@@ -206,13 +211,18 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         inflater.inflate(R.menu.movies_menu, menu)
 
         val search = menu.findItem(R.id.menu_search)
-        val searchView = search.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true
-        searchView?.setOnQueryTextListener(this)
+        searchView = (search.actionView as? SearchView)!!
+        searchView.isSubmitButtonEnabled = true
+        searchView.setOnQueryTextListener(this)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if(query != null) {
+            requireActivity().currentFocus?.let { view ->
+                val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+            searchView.clearFocus()
             searchApiData(query)
         }
         return true

@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import id.android.official.moviephile.data.DataStoreRepository
 import id.android.official.moviephile.utils.Constants.Companion.BACK_ONLINE
 import id.android.official.moviephile.utils.Constants.Companion.QUERY_Q
+import id.android.official.moviephile.utils.Constants.Companion.QUERY_TCONST
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -36,6 +37,14 @@ class MoviesViewModel @Inject constructor(
         val queries: HashMap<String, String> = HashMap()
 
         queries[QUERY_Q] = searchQuery
+
+        return queries
+    }
+
+    fun applySearchMovieDetails(idMovie: String): HashMap<String, String> {
+        val queries: HashMap<String, String> = HashMap()
+
+        queries[QUERY_TCONST] = idMovie
 
         return queries
     }

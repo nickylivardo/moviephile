@@ -1,6 +1,5 @@
 package id.android.official.moviephile.bindingadapters
 
-import android.content.res.Resources
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView

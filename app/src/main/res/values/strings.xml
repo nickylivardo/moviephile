@@ -38,7 +38,14 @@
     <string name="no">NO</string>
     <string name="tab">Tab</string>
     <string name="title">Movie Title</string>
-    <string name="plot_summary">Plot Summary</string>
+    <string name="plot_summary">Plot Summary :</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="type">Tipe :</string>
+    <string name="feature">Feature</string>
+    <string name="rank_value">1234</string>
+    <string name="rank">Ranking :</string>
+    <string name="stars_value">Robert Downey Jr., Chris Hemsworth, Mark Ruffalo</string>
+    <string name="stars">Stars :</string>
 
 
 </resources>

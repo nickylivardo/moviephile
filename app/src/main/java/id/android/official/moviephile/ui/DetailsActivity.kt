@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import id.android.official.moviephile.R
 import id.android.official.moviephile.adapters.PagerAdapter
 import id.android.official.moviephile.databinding.ActivityDetailsBinding
@@ -14,6 +15,7 @@ import id.android.official.moviephile.ui.fragments.AboutFragment
 import id.android.official.moviephile.ui.fragments.AddToListFragment
 import id.android.official.moviephile.ui.fragments.OverviewFragment
 
+@AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
 
     private val args by navArgs<DetailsActivityArgs>()
