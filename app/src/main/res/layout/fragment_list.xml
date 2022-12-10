@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BELUM ADA LIST!"
-        android:visibility="gone"
+        android:visibility="visible"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,9 +22,151 @@
         android:id="@+id/movie_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_margin="5dp"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/avengerendgame"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/movie_image"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Avenger EndGame (2019)"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Film terburuk yang pernah aku tonton"
+                    android:gravity="center"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="Aktingnya kaku, alur ceritanya tidak masuk akal, cinematografinya buruk dan membosankan lagi, jangan pernah lagi nonton film ini."
+                    android:textSize="16sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_margin="5dp"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/sriasih"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/movie_image"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sri Asih (2022)"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Mayan lah filmnya"
+                    android:gravity="center"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="Filmnya OK, tidak terlalu banyak basa basi, aktornya cakep-cakep semua, intinya mayan lah."
+                    android:textSize="16sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_margin="5dp"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/inception"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/movie_image"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Inception (2010)"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="20sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Masterpiece!!!"
+                    android:gravity="center"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="No komen lah klo soal pilem dr Christopher Nolan, the best of the best! MUST REWATCH!!!."
+                    android:textSize="16sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
 
 
 

@@ -23,6 +23,8 @@ class Constants {
         const val USERS = "users"
         const val USERID = "userId"
 
+        const val MOVIE_LIST = "movie_list"
+
         //DataStore Preferences
         const val PREFERENCES_NAME = "my_preferences"
         const val SIGNUP_STATUS = "signup_status"
