@@ -2,18 +2,25 @@ package id.android.official.moviephile.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.service.autofill.UserData
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import coil.load
 import id.android.official.moviephile.R
 import id.android.official.moviephile.databinding.FragmentProfileBinding
+import id.android.official.moviephile.ui.EditProfileActivity
 import id.android.official.moviephile.ui.LoginActivity
+import id.android.official.moviephile.ui.VerificationActivity
 import id.android.official.moviephile.utils.Constants.Companion.SIGNUP_STATUS
 import id.android.official.moviephile.viewmodels.FirebaseViewModel
+
 
 class ProfileFragment : Fragment() {
 
@@ -21,6 +28,8 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var firebaseViewModel: FirebaseViewModel
+
+    private var userId : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +46,23 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.lifecycleOwner = viewLifecycleOwner
+
         binding.btnLogOut.setOnClickListener{
             showAlertDialogToLogOut()
+        }
+
+        userId = firebaseViewModel.auth.currentUser?.uid
+
+        if(userId != null) {
+            Log.d("USER_ID", userId!!)
+            firebaseViewModel.getUserData(userId!!, this)
+        }
+
+        binding.btnProfileEdit.setOnClickListener {
+            val intent = Intent(context, EditProfileActivity::class.java)
+            intent.putExtra("userId",userId)
+            startActivity(intent)
         }
 
 
@@ -67,6 +91,15 @@ class ProfileFragment : Fragment() {
         alertDialog.show()
     }
 
+    fun assignUserData(userData: id.android.official.moviephile.models.UserData) {
+        binding.profileName.text = userData.name
+        binding.profileMobile.text = userData.mobile
+        binding.profileQuote.text = ""
+        loadImageFromUrl(binding.profileImage, userData.image)
+        binding.profileQuote.text = userData.quote
+
+    }
+
     private fun signOut(){
         firebaseViewModel.auth.signOut()
 
@@ -82,6 +115,15 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    fun loadImageFromUrl(imageView: ImageView, imageUrl: String?) {
+        imageView.load(imageUrl) {
+            crossfade(600)
+            error(R.drawable.ic_user_place_holder)
+            fallback(R.drawable.ic_user_place_holder)
+        }
     }
 
 }

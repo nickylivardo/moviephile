@@ -52,6 +52,15 @@
     <string name="imdb_rating">IMDB Rating :</string>
     <string name="top_rank">Top Rank :</string>
     <string name="rating_count">Rating Count :</string>
+    <string name="edit_profile">EDIT PROFILE</string>
+    <string name="release_date">Release Date :</string>
+    <string name="update">UPDATE</string>
+    <string name="quote_movie_favorite">Favorite Movie Quote</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="comment">Tambahkan Komentar</string>
+    <string name="tambahkan_review">Tambahkan Review Anda</string>
+    <string name="add_to_list">ADD TO LIST</string>
+    <string name="judul">Judul</string>
 
 
 </resources>

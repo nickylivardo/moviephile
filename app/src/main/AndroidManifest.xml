@@ -17,9 +17,19 @@
         android:theme="@style/SplashScreenStyle"
         tools:targetApi="31">
         <activity
-            android:name=".ui.DetailsActivity"
-            android:label="Movie Details"
+            android:name=".ui.EditProfileActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/DetailsActivityStyle"
+            tools:ignore="LockedOrientationActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.DetailsActivity"
+            android:exported="false"
+            android:label="Movie Details"
             android:screenOrientation="portrait"
             android:theme="@style/DetailsActivityStyle"
             tools:ignore="LockedOrientationActivity">
@@ -63,14 +73,6 @@
             android:theme="@style/Theme.Moviephile.NoActionBar"
             android:windowSoftInputMode="adjustPan"
             tools:ignore="LockedOrientationActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

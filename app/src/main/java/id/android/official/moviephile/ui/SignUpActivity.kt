@@ -58,7 +58,7 @@ class SignUpActivity : BaseActivity() {
                 }
                 if(validateSignInDetails()) {
                     showProgressDialog(resources.getString(R.string.wait))
-                    firebaseViewModel.onSignUp(mobile, mNameTextField.text.toString(), "", this)
+                    firebaseViewModel.onSignUp(mobile, mNameTextField.text.toString(), "", "", this)
                 }
             }
         }

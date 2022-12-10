@@ -5,6 +5,8 @@ plugins {
     // enable plugin for kapt and dagger hilt
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+
+    // Firebase
     id 'com.google.gms.google-services'
 
     // enable parcelize plugin

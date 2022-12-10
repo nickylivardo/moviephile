@@ -12,6 +12,7 @@ import id.android.official.moviephile.data.DataStoreRepository
 import id.android.official.moviephile.models.UserData
 import id.android.official.moviephile.ui.SignUpActivity
 import id.android.official.moviephile.ui.VerificationActivity
+import id.android.official.moviephile.ui.fragments.ProfileFragment
 import id.android.official.moviephile.utils.Constants.Companion.SIGNUP_STATUS
 import id.android.official.moviephile.utils.Constants.Companion.USERS
 import kotlinx.coroutines.launch
@@ -41,8 +42,8 @@ class FirebaseViewModel @Inject constructor(
         return currentUserID
     }
 
-    fun onSignUp(phoneNumber: String, name: String, imageUrl: String?, activity: Activity) {
-        createOrUpdateProfile(name, phoneNumber, imageUrl, activity)
+    fun onSignUp(phoneNumber: String, name: String, imageUrl: String?, quote: String?, activity: Activity) {
+        createOrUpdateProfile(name, phoneNumber, imageUrl, quote, activity)
     }
 
 
@@ -50,14 +51,16 @@ class FirebaseViewModel @Inject constructor(
         name: String?,
         phoneNumber: String?,
         imageUrl: String?,
+        quote: String?,
         activity: Activity
     ) {
         val uid = getCurrentUserID()
         val userData = UserData(
-            UserID = uid,
+            userID = uid,
             name = name,
             mobile = phoneNumber,
             image = imageUrl,
+            quote = quote,
             following = userData?.following
         )
 
@@ -75,7 +78,7 @@ class FirebaseViewModel @Inject constructor(
                 } else {
                     db.collection(USERS).document(uid).set(userData)
                     saveBooleanPreferences(SIGNUP_STATUS, true)
-                    getUserData(uid)
+//                    getUserData(uid)
                     when (activity) {
                         is SignUpActivity -> {
                             activity.signUpSuccess()
@@ -87,8 +90,11 @@ class FirebaseViewModel @Inject constructor(
         }
     }
 
-    private fun getUserData (uid: String) {
-
+    fun getUserData (uid: String, fragment: ProfileFragment) {
+        db.collection(USERS).document(uid).get().addOnSuccessListener{
+            val userData = it.toObject(UserData::class.java)!!
+            fragment.assignUserData(userData)
+        }
     }
 
     fun checkUserRegistration(activity: Activity) {
